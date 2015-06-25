@@ -1,0 +1,30 @@
+[submodule "modules/apache"]
+	path = modules/apache
+	url = https://github.com/puppetlabs/puppetlabs-apache.git
+[submodule "modules/concat"]
+	path = modules/concat
+	url = https://github.com/puppetlabs/puppetlabs-concat.git
+[submodule "modules/stdlib"]
+	path = modules/stdlib
+	url = https://github.com/puppetlabs/puppetlabs-stdlib.git
+[submodule "modules/mysql"]
+	path = modules/mysql
+	url = https://github.com/puppetlabs/puppetlabs-mysql.git
+[submodule "modules/memcached"]
+	path = modules/memcached
+	url = https://github.com/saz/puppet-memcached.git
+[submodule "modules/nagios"]
+	path = modules/nagios
+	url = https://github.com/eumel8/nagios.git
+[submodule "scripts/fpm"]
+	path = scripts/fpm
+	url = https://github.com/jordansissel/fpm.git
+[submodule "modules/haproxy"]
+	path = modules/haproxy
+	url = https://github.com/puppetlabs/puppetlabs-haproxy.git
+[submodule "modules/sudo"]
+	path = modules/sudo
+	url = https://github.com/saz/puppet-sudo.git
+[submodule "modules/apparmor"]
+	path = modules/apparmor
+	url = https://github.com/artem-sidorenko/puppet-apparmor.git

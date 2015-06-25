@@ -28,3 +28,7 @@
 [submodule "modules/apparmor"]
 	path = modules/apparmor
 	url = https://github.com/artem-sidorenko/puppet-apparmor.git
+[submodule "modules/mkfs"]
+	path = modules/mkfs
+	url = https://github.com/eumel8/puppet-mkfs.git
+	branch = master

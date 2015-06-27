@@ -16,14 +16,18 @@ node default {
     ensure => 'directory',
   }
 
-  mkfs::device {'/dev/vdb':
-    dest    => '/data/',
-    require => File['/data'],
+  if $::blockdevices =~ /vdb/ {
+    mkfs::device {'/dev/vdb':
+      dest    => '/data/',
+      require => File['/data'],
+    }
   }
 
-  mkfs::device {'/dev/vdc':
-    dest    => '/db/',
-    require => File['/db'],
+  if $::blockdevices =~ /vdc/ {
+    mkfs::device {'/dev/vdc':
+      dest    => '/db/',
+      require => File['/db'],
+    }
   }
 
 # preparing accounts
@@ -47,7 +51,7 @@ node default {
   file { '/etc/ntp.conf':
     ensure  => 'present',
     replace => 'no',
-    content => "server ntp1.paas.bmp.ref.external.app.telekomcloud.com\nserver ntp2.paas.bmp.ref.external.app.telekomcloud.com\n",
+    content => "server 0.de.pool.ntp.org\nserver 1.de.pool.ntp.org\n",
     mode    => '0644'
   }
 

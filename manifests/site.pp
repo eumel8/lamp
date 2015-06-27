@@ -38,21 +38,8 @@ node default {
 
 # preparing ntp
 
-  package { 'ntp':
-    ensure => 'installed'
-  }
-
-  service { 'ntp':
-    ensure  => running,
-    enable  => true,
-    require => Package['ntp']
-  }
-
-  file { '/etc/ntp.conf':
-    ensure  => 'present',
-    replace => 'no',
-    content => "server 0.de.pool.ntp.org\nserver 1.de.pool.ntp.org\n",
-    mode    => '0644'
+  class { '::ntp':
+    servers => [ '0.de.pool.ntp.org', '1.de.pool.ntp.org' ],
   }
 
 # preparing database
@@ -158,5 +145,12 @@ node default {
   }
 
 # preparing monitoring
-
+  import 'nagios.pp'
+  include monitor
+  class {'nagios::nrpe':
+    nrpe_allowed_hosts   => ['127.0.0.1',"${::ipaddress}"],
+    timeserver           => '01.de.pool.ntp.org',
+    nrpe_conf_overwrite  => 0,
+    monitor_puppet_agent => 1,
+  }
 }

@@ -24,7 +24,7 @@ Requirements
 ------------
 - Virtual Linux Machine (Ubuntu 14.04 trusty)
 - 1 Floating IP
-- 2 attached volumes
+- 2 attached volumes (vdb,vdc)
 
 - Puppet client (at least version 3)
 
@@ -42,7 +42,8 @@ Install server with all defaults (otherwise edit site.pp before apply puppet)
 Testing
 -------
 
-Developed for Ubuntu, will be expand. 
+Developed for Ubuntu, works partly for OpenSUSE 13.2 (beside apparmor, ntp, Apache on 32bit systems)
+Will be expand. Sometimes only small changes are necessary (e.g. service 'ntpd' instead 'ntp').
 
 
 Contributing

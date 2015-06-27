@@ -13,3 +13,12 @@ fpm -s dir -t deb -d 'puppet' -v "01-$BRANCH-$DATE"  \
         --description "LAMP Configuration package" \
         --prefix /etc/puppet  .
 
+
+fpm -s dir -t rpm -d 'puppet' -v "$BRANCH-$DATE"  \
+        -n lamp-conf -a all \
+        -x .git -x .gitmdules  \
+        --rpm-auto-add-directories \
+        --replaces lamp-conf \
+        --description "LAMP Configuration package" \
+        --prefix /etc/puppet  .
+

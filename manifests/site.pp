@@ -99,7 +99,7 @@ node default {
   file { '/etc/haproxy/cloud.pem':
     ensure  => 'file',
     source  => 'puppet:///modules/lamp/cloud.pem',
-    require => Class['haproxy'],
+    require => Package['haproxy'],
   }
 
 

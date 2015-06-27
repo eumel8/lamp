@@ -143,7 +143,7 @@ node default {
     ensure => installed,
   }
 
-  apache::vhost { 'lamp.ref.app.telekomcloud.com':
+  apache::vhost { 'lamp.ref.app.cloud':
     port    => '80',
     docroot => '/data/www/',
   }

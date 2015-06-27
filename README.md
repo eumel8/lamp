@@ -12,7 +12,7 @@ Features
 - format and mount additional volumes
 - set ntp client
 - install MySQL Server with database and user
-- install and configure Haproxy as SSL-Termination
+- install and configure Haproxy as SSL-Termination (needs >v1.5)
 - provides ssl cert
 - install apache with PHP and configured vhost
 - install test web page

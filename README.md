@@ -56,4 +56,9 @@ Contributing
 5. Open a [Pull Request][1]
 6. Enjoy a refreshing Diet Coke and wait
 
+WARNING
+-------
+
+In this project are generated keys for ssh and ssl. Don't use this on your own site! There are ways described
+in the manifest how to generate new keys.
 

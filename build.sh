@@ -9,17 +9,18 @@ if [ `which fpm` ]
 then
 fpm -s dir -t deb -d 'puppet' -v "01-$BRANCH-$DATE"  \
         -n lamp-conf  \
+	-a all \
 	--iteration 1 \
         -x .git -x .gitmdules  \
         -x scripts \
         --description "LAMP Configuration package" \
         --prefix /etc/puppet  .
 
-if [ -f "lamp-conf_01-${BRANCH}-${DATE}-1_amd64.deb" ] 
+if [ -f "lamp-conf_01-${BRANCH}-${DATE}-1_all.deb" ] 
 then
-sudo mv "lamp-conf_01-${BRANCH}-${DATE}-1_amd64.deb" /build/www/
-sudo rm -f "/build/www/lamp-conf_01-${BRANCH}_latest-1_amd64.deb" 
-sudo ln -s "/build/www/lamp-conf_01-${BRANCH}-${DATE}-1_amd64.deb" "/build/www/lamp-conf_01-${BRANCH}_latest-1_amd64.deb" 
+sudo mv "lamp-conf_01-${BRANCH}-${DATE}-1_all.deb" /build/www/
+sudo rm -f "/build/www/lamp-conf_01-${BRANCH}_latest-1_all.deb" 
+sudo ln -s "/build/www/lamp-conf_01-${BRANCH}-${DATE}-1_all.deb" "/build/www/lamp-conf_01-${BRANCH}_latest-1_all.deb" 
 fi
 
 

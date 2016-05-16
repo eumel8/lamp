@@ -92,12 +92,21 @@ Remarks OpenSuSE 13.2:
 SSL certificate problem: unable to get local issuer certificate
 if git clone https://github.com/eumel8/lamp.git
 solution: 
+
     export GIT_SSL_NO_VERIFY=true
 
 package monitoring-plugins-nrpe is missing
 solution:
+
     zypper addrepo http://download.opensuse.org/repositories/server:monitoring/openSUSE_13.2/server:monitoring.repo
     zypper refresh
+
+package apache2-mod_php53 is missing
+solution: define it in side.pp
+
+    class {'apache::mod::php':
+      package_name  => 'apache2-mod_php5',
+    }
 
 
 Contributing

@@ -34,16 +34,70 @@ Usage
 
 Install server with all defaults (otherwise edit site.pp before apply puppet)
 
+as package:
+
     dpkg -i lamp-conf_01-master-1435250897-1_amd64.db
 	cd /etc/puppet
 	puppet apply manifests/site.pp
 
+as git repo:
+
+    rm -rf /etc/puppet
+    git clone https://github.com/eumel8/lamp.git /etc/puppet
+    cd /etc/puppet
+    git submodule init
+    git submodule update
 
 Testing
 -------
 
 Developed for Ubuntu, works partly for OpenSUSE 13.2 (beside apparmor, ntp, Apache on 32bit systems)
 Will be expand. Sometimes only small changes are necessary (e.g. service 'ntpd' instead 'ntp').
+
+Example Ubuntu 12.04:
+---------------------
+
+Install new puppet version
+
+    wget http://apt.puppetlabs.com/puppetlabs-release-precise.deb; dpkg -i puppetlabs-release-precise.deb
+    apt-get update
+    apt-get -y install puppet
+
+Add repo for haproxy-1.5
+
+    apt-get -y install software-properties-common
+    add-apt-repository -y ppa:vbernat/haproxy-1.5
+    apt-get update
+
+Example Ubuntu 14.04:
+---------------------
+
+Add repo for haproxy-1.5
+
+    apt-get -y install software-properties-common
+    add-apt-repository -y ppa:vbernat/haproxy-1.5
+    apt-get update
+
+
+Remarks Ubuntu 14.04:
+---------------------
+
+pnp4nagios is not available, you can disable the option in nagios.pp
+puppet-mysql is not working correctly at the moment
+
+
+Remarks OpenSuSE 13.2:
+----------------------
+
+SSL certificate problem: unable to get local issuer certificate
+if git clone https://github.com/eumel8/lamp.git
+solution: 
+    export GIT_SSL_NO_VERIFY=true
+
+package monitoring-plugins-nrpe is missing
+solution:
+    zypper addrepo http://download.opensuse.org/repositories/server:monitoring/openSUSE_13.2/server:monitoring.repo
+    zypper refresh
 
 
 Contributing

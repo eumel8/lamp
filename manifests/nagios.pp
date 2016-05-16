@@ -6,7 +6,7 @@ class monitor {
     pnp4nagios_rrdbase => "/data/pnp4nagios/",
 
     http_users         => {
-      admin              => { 'password' => '$apr1$Pm4kjpYB$8KGIuRB49Skdf/5/nWfUN1' },
+      admin              => { 'password' => '$apr1$2iKzlV1B$LlWo.u77SHKaPiCq0CnEp0' },
     },
 
 ###################################################################################################################################

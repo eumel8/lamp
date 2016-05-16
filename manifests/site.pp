@@ -44,11 +44,14 @@ node default {
 
 # preparing database
 
-  apparmor::profile{'usr.sbin.mysqld':
-    ensure => enforced,
-    source => 'puppet:///modules/lamp/usr.sbin.mysqld',
-  }
-  
+
+  if $::osfamily =~ /Debian/  {
+    apparmor::profile{'usr.sbin.mysqld':
+      ensure => enforced,
+      source => 'puppet:///modules/lamp/usr.sbin.mysqld',
+    }
+  } 
+
   file {'/var/lib/mysql':
     ensure => symlink,
     target => '/db/mysql',
@@ -126,8 +129,15 @@ node default {
   class {'apache::mod::php':
   }
 
-  package {'php5-mysql':
-    ensure => installed,
+
+  if $::operatingsystemrelease =~ /16.04/ {
+    package {'php-mysql':
+      ensure => installed,
+    }
+  } else {
+    package {'php5-mysql':
+      ensure => installed,
+    }
   }
 
   apache::vhost { 'lamp.ref.app.cloud':

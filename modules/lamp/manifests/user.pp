@@ -37,6 +37,10 @@ class lamp::user {
     owner   => 'root',
   }
 
+  package { 'sudo':
+    ensure => present,
+  }
+
   file { '/etc/sudoers.d/isv':
     ensure  => file,
     content => "%isv ALL=(ALL) NOPASSWD: ALL",
@@ -44,6 +48,7 @@ class lamp::user {
     owner   => root,
     group   => root,
     mode    => '0440',
+    require => Package['sudo'],
   }
 
 }

@@ -128,6 +128,10 @@ node default {
     ensure => installed,
   }
 
+  file {'/etc/apache2/sysconfig.d/include.conf':
+    ensure => present,
+  }
+
   apache::vhost { 'lamp.ref.app.cloud':
     port    => '80',
     docroot => '/data/www/',

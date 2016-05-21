@@ -102,12 +102,70 @@ solution:
     zypper refresh
 
 package apache2-mod_php53 is missing
+
 solution: define it in side.pp
 
     class {'apache::mod::php':
       package_name  => 'apache2-mod_php5',
     }
 
+installing mysql fails with:
+Notice: /Stage[main]/Mysql::Server::Installdb/Exec[mysql_install_db]/returns: FATAL ERROR: Could not find /fill_help_tables.sql
+
+solution: link shared files in the right directory
+
+    file {'/usr/share/mysql':
+      ensure  => 'link',
+      target  => '/usr/share/mariadb',
+      force   => true,
+    }
+
+apache won't start due the obselete modules in apache 2.4:
+httpd2: Syntax error on line 41 of /etc/apache2/httpd.conf: Syntax error on line 1 of /etc/apache2/mods-enabled/authz_default.load: Cannot load /usr/lib64/apache2-prefork/mod_authz_default.so into server: /usr/lib64/apache2-prefork/mod_authz_default.so: cannot open shared object file: No such file or directory
+
+solution: declare apache_version
+
+    class {'apache':
+      mpm_module       => 'prefork',
+      apache_version   => '2.4',
+    }
+
+httpd2: Syntax error on line 185 of /etc/apache2/httpd.conf: Could not open configuration file /etc/apache2/sysconfig.d/include.conf: No such file or directory
+
+solution: create missing config file:
+
+    file {'/etc/apache2/sysconfig.d/include.conf':
+      ensure => present,
+    }
+
+ Failed at step NAMESPACE spawning /usr/sbin/start_apache2: Permission denied
+
+solution
+
+set in /etc/systemd/system/httpd.service
+
+    PrivateTmp=false
+    NoNewPrivileges=yes
+
+and make
+
+    systemctl daemon-reload
+
+
+Syntax error on line 38 of /etc/apache2/httpd.conf: Syntax error on line 1 of /etc/apache2/mods-enabled/access_compat.load: module access_compat_module is built-in and can't be loaded
+
+
+solution
+
+in modules/apache/manifests/default_mods.pp comment out
+
+     ::apache::mod { 'access_compat': }
+
+load /usr/lib64/apache2-prefork/libphp5.so into server: /usr/lib64/apache2-prefork/libphp5.so: cannot open shared object file: No such file or directory
+
+solution
+
+dunno, there is no libphp5.so in OpenSuSE 13.2. Use another apache module like https://github.com/eumel8/puppet-apache
 
 Contributing
 ------------

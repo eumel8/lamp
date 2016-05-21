@@ -52,6 +52,12 @@ node default {
     }
   } 
 
+  file {'/usr/share/mysql':
+    ensure  => 'link',
+    target  => '/usr/share/mariadb',
+    force   => true,
+  }
+
   file {'/var/lib/mysql':
     ensure => symlink,
     target => '/db/mysql',
@@ -118,26 +124,8 @@ node default {
 
 # preparing webserver
 
-  file {'/data/www':
-    ensure  => 'directory',
-  }
-
-  class {'apache':
-    mpm_module       => 'prefork',
-  }
-
-  class {'apache::mod::php':
-  }
-
-
-  if $::operatingsystemrelease =~ /16.04/ {
-    package {'php-mysql':
-      ensure => installed,
-    }
-  } else {
-    package {'php5-mysql':
-      ensure => installed,
-    }
+  package {'php5-mysql':
+    ensure => installed,
   }
 
   apache::vhost { 'lamp.ref.app.cloud':

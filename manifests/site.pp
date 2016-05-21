@@ -16,19 +16,19 @@ node default {
     ensure => 'directory',
   }
 
-  if $::blockdevices =~ /vdb/ {
-    mkfs::device {'/dev/vdb':
-      dest    => '/data/',
-      require => File['/data'],
-    }
-  }
+#  if $::blockdevices =~ /vdb/ {
+#    mkfs::device {'/dev/vdb':
+#      dest    => '/data/',
+#      require => File['/data'],
+#    }
+#  }
 
-  if $::blockdevices =~ /vdc/ {
-    mkfs::device {'/dev/vdc':
-      dest    => '/db/',
-      require => File['/db'],
-    }
-  }
+#  if $::blockdevices =~ /vdc/ {
+#    mkfs::device {'/dev/vdc':
+#      dest    => '/db/',
+#      require => File['/db'],
+#    }
+#  }
 
 # preparing accounts
 # ssh-keygen -t rsa -f modules/lamp/files/root.key

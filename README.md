@@ -86,8 +86,8 @@ pnp4nagios is not available, you can disable the option in nagios.pp
 puppet-mysql is not working correctly at the moment
 
 
-Remarks OpenSuSE 13.2:
-----------------------
+Remarks OpenSuSE 13.2: (tested here)
+------------------------------------
 
 SSL certificate problem: unable to get local issuer certificate
 if git clone https://github.com/eumel8/lamp.git
